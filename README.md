@@ -1,32 +1,29 @@
-# battop
+# mac_utils
 
-A minimal, htop-style battery history chart for macOS.
+Minimal, htop-style terminal monitors for macOS. No dependencies beyond Python 3.
+
+## battop
+
+Battery history chart with charging indicators.
 
 ![battop screenshot](screenshot.png)
-
-## Features
-
-- Full-terminal battery % chart with Unicode block characters for smooth resolution
-- Charging periods highlighted in green
-- History persists to `~/.battop_history.json` (last 24 hours)
-- Resizes dynamically to fill your terminal
-
-## Usage
 
 ```bash
 python3 battop.py
 ```
 
-No dependencies beyond Python 3 and macOS.
+Keys: `q` quit · `r` refresh · `c` clear history
 
-### Keys
+History persists to `~/.battop_history.json` (last 24h). Reads from `pmset` and `ioreg`.
 
-| Key | Action |
-|-----|--------|
-| `q` | Quit |
-| `r` | Force refresh |
-| `c` | Clear history |
+## netop
 
-## How it works
+Network traffic chart — received (cyan, up) and sent (red, down) in a mirrored layout.
 
-Reads battery data from `pmset -g batt` and `ioreg -rc AppleSmartBattery`, samples once per minute, and renders a time-series chart using curses.
+```bash
+python3 netop.py
+```
+
+Keys: `q` quit · `r` refresh · `c` clear history · `i` cycle interface
+
+Auto-detects active interfaces. History persists to `~/.netop_history.json` (last 1h). Reads from `netstat -ib`.
